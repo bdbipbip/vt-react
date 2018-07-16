@@ -160,7 +160,7 @@ class Sidebar extends Component {
     }
 
     resize() {
-        this.setState({onMobile: window.innerWidth < 720});
+        this.setState({onMobile: window.innerWidth <= 720});
     }
 
     handleMenuClick = (evt) => {

@@ -52,15 +52,18 @@ const styles = {
 
 
 class Login extends Component {
-    state = {
-        redirect: false,
-        password: '',
-        username: '',
-        showPassword: false,
-        hoverLogin: false
+    constructor() {
+        super();
+        this.state = {
+            redirect: false,
+            password: '',
+            username: '',
+            showPassword: false,
+            hoverLogin: false
+        }
     }
 
-    handleChange = prop => evt => {
+    handleChange = (prop) => (evt) => {    //eslint-disable-line
         this.setState({ [prop]: evt.target.value });
     }
 
@@ -69,11 +72,11 @@ class Login extends Component {
     }
 
     onHoverButton = () => {
-        this.setState({hoverLogin: true});
+        this.setState({ hoverLogin: true });
     }
 
     offHoverButton = (evt) => {
-        this.setState({hoverLogin: false});
+        this.setState({ hoverLogin: false });
     }
 
     login = () => {
