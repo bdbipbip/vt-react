@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
-import { Dialog, DialogTitle, Typography, Button, Input, Grid, FormControl, Select, MenuItem, List, ListItem, ListItemText } from '../node_modules/@material-ui/core';
+import { Dialog, DialogTitle, Typography, Button, Input, Grid, FormControl, Select, MenuItem } from '../node_modules/@material-ui/core';
 import Axios from '../node_modules/axios';
-import AddIcon from '@material-ui/icons/Add'
 
 
 /// ORDER DIALOG IS OPEN WHEN YOU CLICK ON ADD ORDER, BASED ON MATERIAL DIALOG /////
