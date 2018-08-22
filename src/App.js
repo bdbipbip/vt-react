@@ -1,6 +1,14 @@
 import React, { Component } from 'react'
 import Auth from './Auth'
 
+
+//////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////
+/////////////////// MAIN COMPONENT, ONMOBILE GESTION => RESPONSIVE ///////////////////
+//////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////
+
+
 const styles = {
   auth: {
     marginTop: '80px',
@@ -13,23 +21,23 @@ const styles = {
 }
 
 class App extends Component {
-  constructor () {
+  constructor() {
     super()
-    this.state = { // eslint-disable-line 
-      onMobile: false
+    this.state = {
+      onMobile: true
     }
   }
 
-  componentDidMount () {
+  componentDidMount() {
     window.addEventListener('resize', this.resize.bind(this))
     this.resize()
   }
 
-  resize () {
+  resize() {
     this.setState({ onMobile: window.innerWidth <= 720 })
   }
 
-  render () {
+  render() {
     return (
       <div>
         <div style={this.state.onMobile ? styles.auth : styles.largeAuth}>

@@ -8,6 +8,18 @@ import MenuIcon from "@material-ui/icons/Menu";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////
+/////////////////// HEADER BAR + SIDEBAR GESTION (use navlink to call react-router-dom) 
+/////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
 const styles = {
     burger: {
         bmBurgerBars: {
@@ -98,7 +110,8 @@ const styles = {
         fontSize: "40px",
     },
     logo: {
-        height: "35px"
+        height: "35px",
+        width: '60px'
     },
     largeBurgerIcon: {
         fontSize: "75px",
@@ -118,9 +131,11 @@ const styles = {
     toolbar: {
         height: "100%"
     },
+    titleContainer: {
+        paddingRight: "20%",
+    },
     title: {
-        fontSize: "1.5em",
-        paddingRight: "",
+        fontSize: "1.2em",
         fontWeight: "bold",
         fontFamily: "Arial white"
     },
@@ -129,13 +144,18 @@ const styles = {
         fontWeight: "bold",
         fontFamily: "Arial white"
     },
+    largeTitleContainer: {
+        paddingRight: "20%"
+    },
     navLink: {
         textDecoration: 'none',
-        color: 'white'
+        color: 'white',
+        padding: '5px'
     },
     hoverNavLink: {
         textDecoration: 'none',
-        color: '#565b70'
+        color: '#565b70',
+        padding: '5px'
     }
 };
 
@@ -150,7 +170,8 @@ class Sidebar extends Component {
             false,
             false,
             false,
-            false
+            false,
+            false,
         ]
     };
 
@@ -160,7 +181,11 @@ class Sidebar extends Component {
     }
 
     resize() {
-        this.setState({onMobile: window.innerWidth <= 720});
+        this.setState({ onMobile: window.innerWidth <= 720 });
+    }
+
+    closeMenu = evt => {
+        this.setState({ openMenu: false });
     }
 
     handleMenuClick = (evt) => {
@@ -186,9 +211,9 @@ class Sidebar extends Component {
             <AppBar style={this.state.onMobile ? styles.header : styles.largeHeader}>
                 <Toolbar style={styles.toolbar}>
                     <Grid container direction='row' spacing={8}>
-                        <Grid item container xs={4} sm={4} md={3} lg={2} alignItems={'center'} justify={'flex-start'}>
+                        <Grid item container xs={4} sm={4} md={3} lg={3} alignItems={'center'} justify={'flex-start'}>
                             <Grid item>
-                                <IconButton style={this.state.burgerHover ? (this.state.onMobile ? styles.menuButtonHover : styles.largeMenuButtonHover) : (this.state.onMobile ? styles.menuButton : styles.largeMenuButton) } onMouseEnter={this.changeBurgerHover} onMouseLeave={this.changeBurgerHover} onClick={this.handleMenuClick}>
+                                <IconButton style={this.state.burgerHover ? (this.state.onMobile ? styles.menuButtonHover : styles.largeMenuButtonHover) : (this.state.onMobile ? styles.menuButton : styles.largeMenuButton)} onMouseEnter={this.changeBurgerHover} onMouseLeave={this.changeBurgerHover} onClick={this.handleMenuClick}>
                                     <MenuIcon style={this.state.onMobile ? styles.burgerIcon : styles.largeBurgerIcon} />
                                 </IconButton>
                             </Grid>
@@ -196,8 +221,8 @@ class Sidebar extends Component {
                                 <img style={this.state.onMobile ? styles.logo : styles.largeLogo} alt="logo" src={logo} />
                             </Grid>
                         </Grid>
-                        <Grid container item alignItems={'center'} xs={8} sm={8} md={9} lg={10} justify={"center"} >
-                            <Grid item>
+                        <Grid container item alignItems={'center'} xs={8} sm={8} md={9} lg={9} justify={"center"} style={this.state.onMobile ? null : styles.largeTitleContainer}>
+                            <Grid style={this.state.onMobile ? styles.titleContainer : null} item>
                                 <span style={this.state.onMobile ? styles.title : styles.largeTitle}>VT React Application</span>
                             </Grid>
                         </Grid>
@@ -225,29 +250,31 @@ class Sidebar extends Component {
                 <Menu isOpen={this.state.openMenu} onStateChange={state => this.handleMenuChange(state)} customBurgerIcon={false} styles={this.state.onMobile ? styles.burger : styles.largeBurger}>
                     <div>
                         <NavLink id="Home" to='/' onMouseEnter={(evt) => this.changeNavLinkHover(0, evt)} onMouseLeave={(evt) => this.changeNavLinkHover(0, evt)} style={this.state.navLinks[0] ? styles.hoverNavLink : styles.navLink}>
-                            <span>Home</span>
+                            <span onClick={this.closeMenu}>Home</span>
                         </NavLink>
                     </div>
                     <div>
-                        <NavLink id="Login" to='/login' onMouseEnter={(evt) => this.changeNavLinkHover(1, evt)} onMouseLeave={(evt) => this.changeNavLinkHover(1, evt)} style={this.state.navLinks[1] ? styles.hoverNavLink : styles.navLink}>
-                            <span>Login</span>
+                        <NavLink id="Map" to='/map' onMouseEnter={(evt) => this.changeNavLinkHover(1, evt)} onMouseLeave={(evt) => this.changeNavLinkHover(1, evt)} style={this.state.navLinks[1] ? styles.hoverNavLink : styles.navLink}>
+                            <span onClick={this.closeMenu}>Map</span>
                         </NavLink>
                     </div>
                     <div>
-                        <NavLink id="Public" to='/public' onMouseEnter={(evt) => this.changeNavLinkHover(2, evt)} onMouseLeave={(evt) => this.changeNavLinkHover(2, evt)} style={this.state.navLinks[2] ? styles.hoverNavLink : styles.navLink}>
-                            <span>Public</span>
+                        <NavLink id="Orders" to='/orders' onMouseEnter={(evt) => this.changeNavLinkHover(4, evt)} onMouseLeave={(evt) => this.changeNavLinkHover(4, evt)} style={this.state.navLinks[4] ? styles.hoverNavLink : styles.navLink}>
+                            <span onClick={this.closeMenu}>Orders</span>
                         </NavLink>
                     </div>
                     <div>
-                        <NavLink id="Protected" to='/protected' onMouseEnter={(evt) => this.changeNavLinkHover(3, evt)} onMouseLeave={(evt) => this.changeNavLinkHover(3, evt)} style={this.state.navLinks[3] ? styles.hoverNavLink : styles.navLink}>
-                            <span>Protected</span>
+                        <NavLink id="Logout" to='/logout' onMouseEnter={(evt) => this.changeNavLinkHover(3, evt)} onMouseLeave={(evt) => this.changeNavLinkHover(3, evt)} style={this.state.navLinks[3] ? styles.hoverNavLink : styles.navLink}>
+                            <span onClick={this.closeMenu}>Logout</span>
                         </NavLink>
                     </div>
+
                 </Menu>
             </div>
         );
     }
 
 }
+
 
 export default Sidebar;
